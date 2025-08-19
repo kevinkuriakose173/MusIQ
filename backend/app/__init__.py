@@ -31,7 +31,7 @@ def create_app() -> Flask:
     app.register_blueprint(ai_routes_bp)               # /api/ai/chat
 
     @app.get("/healthz")
-    def healthz():
-        return {"ok": True}
+    def health():
+        return "", 200
 
     return app
