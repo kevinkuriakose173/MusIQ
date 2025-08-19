@@ -30,8 +30,8 @@ def create_app() -> Flask:
     app.register_blueprint(spotify_tools_bp)           # /spotify-tools/...
     app.register_blueprint(ai_routes_bp)               # /api/ai/chat
 
-    @app.get("/health")
-    def health():
+    @app.get("/healthz")
+    def healthz():
         return {"ok": True}
 
     return app
