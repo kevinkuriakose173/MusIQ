@@ -11,7 +11,7 @@ AUTH_URL = "https://accounts.spotify.com/authorize"
 def auth_login():
     client_id = current_app.config["SPOTIFY_CLIENT_ID"]
     redirect_uri = current_app.config["REDIRECT_URI"]
-    scopes = "user-read-email user-top-read user-read-recently-played playlist-modify-public playlist-modify-private user-read-playback-state user-modify-playback-state"
+    scopes = "user-read-email user-top-read user-read-recently-played playlist-modify-public playlist-modify-private playlist-read-private user-read-playback-state user-modify-playback-state user-library-read user-library-modify"
     state = secrets.token_urlsafe(24)
     session["oauth_state"] = state
     params = {

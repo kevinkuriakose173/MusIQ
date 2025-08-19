@@ -40,13 +40,23 @@ export default function NowPlaying() {
     setLoading(true);
     try {
       const r = await fetch(`${B}/api/player/current`, { credentials: "include" });
+      if (r.status === 204) {
+        setPb(null);
+        return;
+      }
+
+      // Any non-OK response → treat as no playback
       if (!r.ok) {
         setPb(null);
         return;
       }
-      const data = await r.json();
-      // Spotify returns {} when nothing is playing
-      setPb(Object.keys(data || {}).length ? data : null);
+
+      // Some proxies/servers may return 200 with empty body; guard for that
+      const text = await r.text();
+      const data = text ? JSON.parse(text) : null;
+
+      // Spotify can return {} when idle; normalize to null for the UI
+      setPb(data && Object.keys(data).length ? data : null);
     } finally {
       setLoading(false);
     }

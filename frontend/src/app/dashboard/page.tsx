@@ -7,6 +7,9 @@ import ArtistGrid from "@/components/ArtistGrid";
 import PlaybackControls from "@/components/PlaybackControls";
 import DevicePicker from "@/components/DevicePicker";
 import NowPlaying from "@/components/NowPlaying";
+import LibraryRow from "@/components/LibraryRow";
+import SearchOverlay from "@/components/SearchOverlay";
+import AIPromptBox from "@/components/AIPromptBox";
 
 const B = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -46,6 +49,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen p-8 max-w-6xl mx-auto flex flex-col gap-8">
+      <SearchOverlay />
       <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h1 className="text-3xl font-bold">Your Dashboard</h1>
         <div className="flex gap-4 items-center">
@@ -53,8 +57,9 @@ export default function Dashboard() {
           <PlaybackControls />
         </div>
       </header>
-
+      
       <NowPlaying />
+      <LibraryRow />
 
       <section className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold">Your Top</h2>
@@ -77,6 +82,7 @@ export default function Dashboard() {
           </section>
         </>
       )}
+      <AIPromptBox />
     </main>
   );
 }
