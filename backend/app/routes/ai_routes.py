@@ -1,14 +1,16 @@
 import os
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from openai import OpenAI
 
 bp = Blueprint("ai", __name__, url_prefix="/api/ai")
 
 # Initialize OpenAI client (your API key must already be in env var)
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
 
 @bp.route("/chat", methods=["POST"])
 def chat():
+    client = OpenAI(api_key=current_app.config["OPENAI_API_KEY"])
+    
     data = request.get_json() or {}
     user_prompt = data.get("prompt")
 
