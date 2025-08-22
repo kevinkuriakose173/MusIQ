@@ -1,1 +1,1 @@
-# SpotifyProject
+# MusIQ
